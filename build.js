@@ -1,34 +1,27 @@
 import StyleDictionary from 'style-dictionary';
 
 // ─── Costanti ─────────────────────────────────────────────────────────────────
-const BRANDS = ['sisal', 'snai', 'pokerstars', 'sisal-casino'];
+const BRANDS = ['sisal', 'snai', 'pokerstars', 'sisalcasino'];
 const MODES  = ['light', 'dark'];
 const OS     = ['ios', 'android'];
 
 // ─── Helper: config per una singola combinazione brand × mode ─────────────────
 function getConfig(brand, mode) {
   return {
+    usesDtcg: true,
+    log: { verbosity: 'verbose' },
+
     source: [
-      // 1. Primitives – valori raw, nessun riferimento esterno
-      'tokens/primitives/value.json',
-
-      // 2. Brand – mappa le primitive sui ruoli semantici (neutral, accent, ecc.)
-      //    Carica SOLO il brand corrente per evitare conflitti
-      `tokens/brands/${brand}.json`,
-
-      // 3. Theme / Mode – definisce l'uso (bg, text, border…)
-      //    mappato sui token del brand
-      `tokens/theme/${mode}.json`,
-
-      // 4. Component – token specifici per componente
-      //    referenzia i token del theme
-      'tokens/component/value.json',
+      'tokens/primitives-value.json',
+      `tokens/brands-${brand}.json`,
+      `tokens/mode-${mode}.json`,
+      'tokens/component-value.json',
     ],
 
     platforms: {
       css: {
-        transformGroup: 'css',   // transform group built-in di Style Dictionary
-        prefix: 'dt',            // tutte le var avranno prefisso --dt-
+        transformGroup: 'css',
+        prefix: 'dt',
         buildPath: 'dist/css/',
         files: [
           {
@@ -36,7 +29,7 @@ function getConfig(brand, mode) {
             format: 'css/variables',
             options: {
               selector: `:root[data-brand="${brand}"][data-theme="${mode}"]`,
-              outputReferences: true,  // mantiene i var() invece di risolvere i valori
+              outputReferences: true,
             },
           },
         ],
@@ -48,12 +41,15 @@ function getConfig(brand, mode) {
 // ─── Helper: config per una singola combinazione brand × mode × os ────────────
 function getConfigWithOS(brand, mode, os) {
   return {
+    usesDtcg: true,
+    log: { verbosity: 'verbose' },
+
     source: [
-      'tokens/primitives/value.json',
-      `tokens/brands/${brand}.json`,
-      `tokens/theme/${mode}.json`,
-      'tokens/component/value.json',
-      `tokens/os/${os}.json`,
+      'tokens/primitives-value.json',
+      `tokens/brands-${brand}.json`,
+      `tokens/mode-${mode}.json`,
+      'tokens/component-value.json',
+      `tokens/operative-system-${os}.json`,
     ],
 
     platforms: {
@@ -80,7 +76,6 @@ function getConfigWithOS(brand, mode, os) {
 async function run() {
   console.log('🚀 Style Dictionary build start\n');
 
-  // brand × mode  →  sisal.light.css, sisal.dark.css, snai.light.css, …
   for (const brand of BRANDS) {
     for (const mode of MODES) {
       console.log(`  building ${brand}.${mode}.css …`);
@@ -89,8 +84,7 @@ async function run() {
     }
   }
 
-  // brand × mode × os  →  sisal.light.ios.css, sisal.dark.android.css, …
-  // Decommenta il blocco sotto se vuoi generare anche questi file
+  // brand × mode × os — decommenta se vuoi generare anche questi file
   /*
   for (const brand of BRANDS) {
     for (const mode of MODES) {
