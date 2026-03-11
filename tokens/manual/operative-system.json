@@ -1,0 +1,44 @@
+{
+  "viewport-width": {
+    "$value": {
+      "ios": 375,
+      "android": 360
+    },
+    "$type": "size"
+  },
+  "container": {
+    "$value": {
+      "ios": 343,
+      "android": 328
+    },
+    "$type": "size"
+  },
+  "OS": {
+    "$value": {
+      "ios": "ios",
+      "android": "android"
+    },
+    "$type": "string"
+  },
+  "Notifications": {
+    "$value": {
+      "ios": "10",
+      "android": "10"
+    },
+    "$type": "string"
+  },
+  "-99-Notifications": {
+    "$value": {
+      "ios": "120",
+      "android": "120"
+    },
+    "$type": "string"
+  },
+  "Trailing-Title": {
+    "$value": {
+      "ios": "Trailing Title Example",
+      "android": "Trailing Title Example"
+    },
+    "$type": "string"
+  }
+}
