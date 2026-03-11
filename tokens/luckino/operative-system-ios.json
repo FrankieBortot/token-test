@@ -1,5 +1,5 @@
 {
-  "viewport-width": {
+  "viewportWidth": {
     "$value": 375,
     "$type": "size"
   },
@@ -13,14 +13,6 @@
   },
   "Notifications": {
     "$value": "10",
-    "$type": "string"
-  },
-  "-99-Notifications": {
-    "$value": "120",
-    "$type": "string"
-  },
-  "Trailing-Title": {
-    "$value": "Trailing Title Example",
     "$type": "string"
   }
 }

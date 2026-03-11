@@ -1,9 +1,5 @@
 {
   "color": {
-    "Color": {
-      "$value": "#ffffff",
-      "$type": "color"
-    },
     "bg": {
       "neutral": {
         "$value": "{neutral.50}",
@@ -709,10 +705,6 @@
       }
     },
     "border": {
-      "inverse": {
-        "$value": "{neutral.white}",
-        "$type": "color"
-      },
       "selected": {
         "primary": {
           "subtle": {
@@ -742,6 +734,10 @@
             "$type": "color"
           }
         }
+      },
+      "inverse": {
+        "$value": "{neutral.white}",
+        "$type": "color"
       },
       "danger": {
         "$value": "{error.500}",
