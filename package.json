@@ -1,0 +1,25 @@
+{
+  "name": "token-test",
+  "version": "1.0.0",
+  "description": "This example code is bare-bones to show you what this framework can do. If you have the style-dictionary module installed globally, you can `cd` into this directory and run:",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build-tokens": "style-dictionary build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FrankieBortot/token-test.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/FrankieBortot/token-test/issues"
+  },
+  "homepage": "https://github.com/FrankieBortot/token-test#readme",
+  "devDependencies": {
+    "style-dictionary": "^5.3.3"
+  }
+}
