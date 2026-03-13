@@ -1,103 +1,252 @@
-import StyleDictionary from 'style-dictionary';
+import { readFileSync, writeFileSync, mkdirSync } from 'fs';
 
-// ─── Costanti ─────────────────────────────────────────────────────────────────
-const BRANDS = ['sisal', 'snai', 'pokerstars', 'sisalcasino'];
+// ─── Config ───────────────────────────────────────────────────────────────────
+
+const BRANDS = ['sisal', 'snai', 'pokerstars', 'sisalCasino'];
 const MODES  = ['light', 'dark'];
-const OS     = ['ios', 'android'];
+const PREFIX = 'dt';
 
-// ─── Helper: config per una singola combinazione brand × mode ─────────────────
-function getConfig(brand, mode) {
-  return {
-    usesDtcg: true,
-    log: { verbosity: 'verbose' },
+// ─── Helpers ──────────────────────────────────────────────────────────────────
 
-    source: [
-      'tokens/primitives-value.json',
-      `tokens/brands-${brand}.json`,
-      `tokens/mode-${mode}.json`,
-      'tokens/component-value.json',
-    ],
-
-    platforms: {
-      css: {
-        transformGroup: 'css',
-        prefix: 'dt',
-        buildPath: 'dist/css/',
-        files: [
-          {
-            destination: `${brand}.${mode}.css`,
-            format: 'css/variables',
-            options: {
-              selector: `:root[data-brand="${brand}"][data-theme="${mode}"]`,
-              outputReferences: true,
-            },
-          },
-        ],
-      },
-    },
-  };
+function loadJson(path) {
+  return JSON.parse(readFileSync(path, 'utf-8'));
 }
 
-// ─── Helper: config per una singola combinazione brand × mode × os ────────────
-function getConfigWithOS(brand, mode, os) {
-  return {
-    usesDtcg: true,
-    log: { verbosity: 'verbose' },
-
-    source: [
-      'tokens/primitives-value.json',
-      `tokens/brands-${brand}.json`,
-      `tokens/mode-${mode}.json`,
-      'tokens/component-value.json',
-      `tokens/operative-system-${os}.json`,
-    ],
-
-    platforms: {
-      css: {
-        transformGroup: 'css',
-        prefix: 'dt',
-        buildPath: 'dist/css/',
-        files: [
-          {
-            destination: `${brand}.${mode}.${os}.css`,
-            format: 'css/variables',
-            options: {
-              selector: `:root[data-brand="${brand}"][data-theme="${mode}"][data-os="${os}"]`,
-              outputReferences: true,
-            },
-          },
-        ],
-      },
-    },
-  };
-}
-
-// ─── Build ────────────────────────────────────────────────────────────────────
-async function run() {
-  console.log('🚀 Style Dictionary build start\n');
-
-  for (const brand of BRANDS) {
-    for (const mode of MODES) {
-      console.log(`  building ${brand}.${mode}.css …`);
-      const sd = new StyleDictionary(getConfig(brand, mode));
-      await sd.buildAllPlatforms();
-    }
-  }
-
-  // brand × mode × os — decommenta se vuoi generare anche questi file
-  /*
-  for (const brand of BRANDS) {
-    for (const mode of MODES) {
-      for (const os of OS) {
-        console.log(`  building ${brand}.${mode}.${os}.css …`);
-        const sd = new StyleDictionary(getConfigWithOS(brand, mode, os));
-        await sd.buildAllPlatforms();
+function deepMerge(...objects) {
+  const result = {};
+  for (const obj of objects) {
+    for (const [key, val] of Object.entries(obj)) {
+      if (val && typeof val === 'object' && !Array.isArray(val) && result[key] && typeof result[key] === 'object') {
+        result[key] = deepMerge(result[key], val);
+      } else {
+        result[key] = val;
       }
     }
   }
-  */
-
-  console.log('\n✅ Build completata → dist/css/');
+  return result;
 }
 
-run().catch(console.error);
+function getByPath(obj, path) {
+  const parts = path.split('.');
+  let cur = obj;
+  for (const p of parts) {
+    if (cur === undefined || cur === null) return undefined;
+    cur = cur[p];
+  }
+  return cur;
+}
+
+function resolveRef(ref, tree, visited = new Set()) {
+  const path = ref.replace(/^\{|\}$/g, '');
+  if (visited.has(path)) {
+    console.warn(`  ⚠ Riferimento circolare: ${path}`);
+    return ref;
+  }
+  visited.add(path);
+
+  const node = getByPath(tree, path);
+  if (node === undefined) {
+    console.warn(`  ⚠ Riferimento non trovato: ${path}`);
+    return ref;
+  }
+  if (node && typeof node === 'object' && '$value' in node) {
+    const val = node['$value'];
+    if (typeof val === 'string' && val.startsWith('{')) {
+      return resolveRef(val, tree, visited);
+    }
+    return val;
+  }
+  if (typeof node !== 'object') return node;
+  console.warn(`  ⚠ Path non è un token leaf: ${path}`);
+  return ref;
+}
+
+function flattenTokens(obj, tree, prefix = '') {
+  const result = {};
+  for (const [key, val] of Object.entries(obj)) {
+    if (key.startsWith('$')) continue;
+    const fullKey = prefix ? `${prefix}-${key}` : key;
+    if (val && typeof val === 'object') {
+      const hasValue    = '$value' in val;
+      const children    = Object.keys(val).filter(k => !k.startsWith('$'));
+      const hasChildren = children.length > 0;
+      if (hasValue) {
+        let resolved = val['$value'];
+        if (typeof resolved === 'string' && resolved.startsWith('{')) {
+          resolved = resolveRef(resolved, tree);
+        }
+        result[fullKey] = { value: resolved, type: val['$type'] ?? 'unknown' };
+      }
+      if (hasChildren) {
+        Object.assign(result, flattenTokens(
+          Object.fromEntries(children.map(k => [k, val[k]])),
+          tree,
+          fullKey
+        ));
+      }
+    }
+  }
+  return result;
+}
+
+// ─── Serializers ──────────────────────────────────────────────────────────────
+
+// CSS custom properties
+// Output: :root[data-brand="sisal"][data-theme="light"] { --dt-*: value; }
+function serializeCss(flat, brand, mode) {
+  const selector = `:root[data-brand="${brand}"][data-theme="${mode}"]`;
+  const vars = Object.entries(flat)
+    .map(([key, { value }]) => `  --${PREFIX}-${key}: ${value};`)
+    .join('\n');
+  return `${selector} {\n${vars}\n}\n`;
+}
+
+// SCSS custom properties (stesso contenuto del CSS, valido come SCSS)
+// TODO: chiedere ai dev se preferiscono variabili SCSS ($var) invece di custom properties (--var)
+function serializeScss(flat, brand, mode) {
+  return serializeCss(flat, brand, mode);
+}
+
+// iOS — SwiftUI Color + CGFloat per dimensioni
+// TODO: chiedere ai dev se preferiscono UIKit (UIColor) invece di SwiftUI (Color)
+// TODO: chiedere se preferiscono enum, extension o struct
+function serializeSwift(flat, brand, mode) {
+  const structName = `${capitalize(brand)}${capitalize(mode)}Tokens`;
+
+  const props = Object.entries(flat).map(([key, { value, type }]) => {
+    const swiftName = toCamelCase(key);
+    if (type === 'color') {
+      const color = hexToSwiftColor(value);
+      if (!color) return `  // ⚠ valore colore non parsabile: ${key} = ${value}`;
+      return `  static let ${swiftName} = Color(red: ${color.r}, green: ${color.g}, blue: ${color.b}, opacity: ${color.a})`;
+    }
+    if (type === 'dimension') {
+      const num = parseFloat(value);
+      return `  static let ${swiftName}: CGFloat = ${isNaN(num) ? `/* ${value} */` : num}`;
+    }
+    return `  static let ${swiftName} = "${value}"`;
+  }).join('\n');
+
+  return [
+    `import SwiftUI`,
+    ``,
+    `// Brand: ${brand} | Mode: ${mode}`,
+    `// Generato automaticamente — non modificare manualmente`,
+    `struct ${structName} {`,
+    props,
+    `}`,
+    ``,
+  ].join('\n');
+}
+
+// Android — XML resources (color + dimen)
+// TODO: chiedere ai dev se preferiscono Compose (MaterialTheme) invece di XML resources
+function serializeAndroidXml(flat, brand, mode) {
+  const lines = Object.entries(flat).map(([key, { value, type }]) => {
+    const name = toSnakeCase(key);
+    if (type === 'color') {
+      const hex8 = toAndroidHex(value);
+      if (!hex8) return `  <!-- ⚠ valore colore non parsabile: ${key} = ${value} -->`;
+      return `  <color name="${name}">${hex8}</color>`;
+    }
+    if (type === 'dimension') {
+      return `  <dimen name="${name}">${value}</dimen>`;
+    }
+    return `  <string name="${name}">${value}</string>`;
+  }).join('\n');
+
+  return [
+    `<?xml version="1.0" encoding="utf-8"?>`,
+    `<!-- Brand: ${brand} | Mode: ${mode} -->`,
+    `<!-- Generato automaticamente — non modificare manualmente -->`,
+    `<resources>`,
+    lines,
+    `</resources>`,
+    ``,
+  ].join('\n');
+}
+
+// ─── Utilities colore ─────────────────────────────────────────────────────────
+
+function hexToSwiftColor(hex) {
+  if (typeof hex !== 'string') return null;
+  const clean = hex.replace('#', '');
+  if (clean.length === 6) {
+    const r = parseInt(clean.slice(0, 2), 16) / 255;
+    const g = parseInt(clean.slice(2, 4), 16) / 255;
+    const b = parseInt(clean.slice(4, 6), 16) / 255;
+    return { r: r.toFixed(4), g: g.toFixed(4), b: b.toFixed(4), a: '1.0' };
+  }
+  if (clean.length === 8) {
+    const r = parseInt(clean.slice(0, 2), 16) / 255;
+    const g = parseInt(clean.slice(2, 4), 16) / 255;
+    const b = parseInt(clean.slice(4, 6), 16) / 255;
+    const a = parseInt(clean.slice(6, 8), 16) / 255;
+    return { r: r.toFixed(4), g: g.toFixed(4), b: b.toFixed(4), a: a.toFixed(4) };
+  }
+  return null;
+}
+
+// Converte hex RGB/RGBA in formato Android #AARRGGBB
+// CSS è #RRGGBBAA, Android vuole #AARRGGBB
+function toAndroidHex(hex) {
+  if (typeof hex !== 'string') return null;
+  const clean = hex.replace('#', '');
+  if (clean.length === 6) return `#FF${clean.toUpperCase()}`;
+  if (clean.length === 8) {
+    const rr = clean.slice(0, 2);
+    const gg = clean.slice(2, 4);
+    const bb = clean.slice(4, 6);
+    const aa = clean.slice(6, 8);
+    return `#${aa}${rr}${gg}${bb}`.toUpperCase();
+  }
+  return null;
+}
+
+function toCamelCase(str) {
+  return str.replace(/-([a-z0-9])/gi, (_, c) => c.toUpperCase());
+}
+
+function toSnakeCase(str) {
+  return str.replace(/-/g, '_').toLowerCase();
+}
+
+function capitalize(str) {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
+// ─── Build ────────────────────────────────────────────────────────────────────
+
+['dist/css', 'dist/scss', 'dist/ios', 'dist/android'].forEach(d => mkdirSync(d, { recursive: true }));
+
+const primitives = loadJson('tokens/primitives.json');
+const modeLight  = loadJson('tokens/mode.light.json');
+const modeDark   = loadJson('tokens/mode.dark.json');
+const component  = loadJson('tokens/component.json');
+
+const brandFiles = {
+  sisal:       loadJson('tokens/brand.sisal.json'),
+  snai:        loadJson('tokens/brand.snai.json'),
+  pokerstars:  loadJson('tokens/brand.pokerstars.json'),
+  sisalCasino: loadJson('tokens/brand.sisalCasino.json'),
+};
+
+for (const brand of BRANDS) {
+  for (const mode of MODES) {
+    console.log(`\nBuilding ${brand}.${mode}...`);
+
+    const modeTokens = mode === 'light' ? modeLight : modeDark;
+    const tree = deepMerge(primitives, brandFiles[brand], modeTokens, component);
+    const flat = flattenTokens(tree, tree);
+    const count = Object.keys(flat).length;
+
+    writeFileSync(`dist/css/${brand}.${mode}.css`,     serializeCss(flat, brand, mode),        'utf-8');
+    writeFileSync(`dist/scss/${brand}.${mode}.scss`,   serializeScss(flat, brand, mode),       'utf-8');
+    writeFileSync(`dist/ios/${brand}.${mode}.swift`,   serializeSwift(flat, brand, mode),      'utf-8');
+    writeFileSync(`dist/android/${brand}.${mode}.xml`, serializeAndroidXml(flat, brand, mode), 'utf-8');
+
+    console.log(`  ✓ ${count} token → CSS, SCSS, Swift, Android XML`);
+  }
+}
+
+console.log('\n✅ Build completata.');

@@ -1,0 +1,20 @@
+{
+  "operative system": {
+    "viewportWidth": {
+      "$type": "dimension",
+      "$value": "360px"
+    },
+    "container": {
+      "$type": "dimension",
+      "$value": "328px"
+    },
+    "OS": {
+      "$type": "string",
+      "$value": "android"
+    },
+    "Notifications": {
+      "$type": "string",
+      "$value": "10"
+    }
+  }
+}
