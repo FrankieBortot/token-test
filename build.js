@@ -49,14 +49,19 @@ function resolveRef(ref, tree, visited = new Set()) {
     console.warn(`  ⚠ Riferimento non trovato: ${path}`);
     return ref;
   }
-  if (node && typeof node === 'object' && '$value' in node) {
-    const val = node['$value'];
+
+  // Nodo con value (token leaf o ambiguo)
+  if (node && typeof node === 'object' && 'value' in node) {
+    const val = node['value'];
     if (typeof val === 'string' && val.startsWith('{')) {
       return resolveRef(val, tree, visited);
     }
     return val;
   }
+
+  // Valore scalare diretto
   if (typeof node !== 'object') return node;
+
   console.warn(`  ⚠ Path non è un token leaf: ${path}`);
   return ref;
 }
@@ -64,19 +69,24 @@ function resolveRef(ref, tree, visited = new Set()) {
 function flattenTokens(obj, tree, prefix = '') {
   const result = {};
   for (const [key, val] of Object.entries(obj)) {
-    if (key.startsWith('$')) continue;
+    // Salta chiavi meta
+    if (['type', 'value', 'description', 'extensions'].includes(key)) continue;
+
     const fullKey = prefix ? `${prefix}-${key}` : key;
+
     if (val && typeof val === 'object') {
-      const hasValue    = '$value' in val;
-      const children    = Object.keys(val).filter(k => !k.startsWith('$'));
+      const hasValue    = 'value' in val;
+      const children    = Object.keys(val).filter(k => !['type', 'value', 'description', 'extensions'].includes(k));
       const hasChildren = children.length > 0;
+
       if (hasValue) {
-        let resolved = val['$value'];
+        let resolved = val['value'];
         if (typeof resolved === 'string' && resolved.startsWith('{')) {
           resolved = resolveRef(resolved, tree);
         }
-        result[fullKey] = { value: resolved, type: val['$type'] ?? 'unknown' };
+        result[fullKey] = { value: resolved, type: val['type'] ?? 'unknown' };
       }
+
       if (hasChildren) {
         Object.assign(result, flattenTokens(
           Object.fromEntries(children.map(k => [k, val[k]])),
@@ -91,8 +101,6 @@ function flattenTokens(obj, tree, prefix = '') {
 
 // ─── Serializers ──────────────────────────────────────────────────────────────
 
-// CSS custom properties
-// Output: :root[data-brand="sisal"][data-theme="light"] { --dt-*: value; }
 function serializeCss(flat, brand, mode) {
   const selector = `:root[data-brand="${brand}"][data-theme="${mode}"]`;
   const vars = Object.entries(flat)
@@ -101,18 +109,15 @@ function serializeCss(flat, brand, mode) {
   return `${selector} {\n${vars}\n}\n`;
 }
 
-// SCSS custom properties (stesso contenuto del CSS, valido come SCSS)
 // TODO: chiedere ai dev se preferiscono variabili SCSS ($var) invece di custom properties (--var)
 function serializeScss(flat, brand, mode) {
   return serializeCss(flat, brand, mode);
 }
 
-// iOS — SwiftUI Color + CGFloat per dimensioni
 // TODO: chiedere ai dev se preferiscono UIKit (UIColor) invece di SwiftUI (Color)
 // TODO: chiedere se preferiscono enum, extension o struct
 function serializeSwift(flat, brand, mode) {
   const structName = `${capitalize(brand)}${capitalize(mode)}Tokens`;
-
   const props = Object.entries(flat).map(([key, { value, type }]) => {
     const swiftName = toCamelCase(key);
     if (type === 'color') {
@@ -120,7 +125,7 @@ function serializeSwift(flat, brand, mode) {
       if (!color) return `  // ⚠ valore colore non parsabile: ${key} = ${value}`;
       return `  static let ${swiftName} = Color(red: ${color.r}, green: ${color.g}, blue: ${color.b}, opacity: ${color.a})`;
     }
-    if (type === 'dimension') {
+    if (type === 'dimension' || type === 'number') {
       const num = parseFloat(value);
       return `  static let ${swiftName}: CGFloat = ${isNaN(num) ? `/* ${value} */` : num}`;
     }
@@ -139,7 +144,6 @@ function serializeSwift(flat, brand, mode) {
   ].join('\n');
 }
 
-// Android — XML resources (color + dimen)
 // TODO: chiedere ai dev se preferiscono Compose (MaterialTheme) invece di XML resources
 function serializeAndroidXml(flat, brand, mode) {
   const lines = Object.entries(flat).map(([key, { value, type }]) => {
@@ -149,7 +153,7 @@ function serializeAndroidXml(flat, brand, mode) {
       if (!hex8) return `  <!-- ⚠ valore colore non parsabile: ${key} = ${value} -->`;
       return `  <color name="${name}">${hex8}</color>`;
     }
-    if (type === 'dimension') {
+    if (type === 'dimension' || type === 'number') {
       return `  <dimen name="${name}">${value}</dimen>`;
     }
     return `  <string name="${name}">${value}</string>`;
@@ -166,38 +170,37 @@ function serializeAndroidXml(flat, brand, mode) {
   ].join('\n');
 }
 
-// ─── Utilities colore ─────────────────────────────────────────────────────────
+// ─── Utilities ────────────────────────────────────────────────────────────────
 
 function hexToSwiftColor(hex) {
   if (typeof hex !== 'string') return null;
   const clean = hex.replace('#', '');
   if (clean.length === 6) {
-    const r = parseInt(clean.slice(0, 2), 16) / 255;
-    const g = parseInt(clean.slice(2, 4), 16) / 255;
-    const b = parseInt(clean.slice(4, 6), 16) / 255;
-    return { r: r.toFixed(4), g: g.toFixed(4), b: b.toFixed(4), a: '1.0' };
+    return {
+      r: (parseInt(clean.slice(0,2), 16)/255).toFixed(4),
+      g: (parseInt(clean.slice(2,4), 16)/255).toFixed(4),
+      b: (parseInt(clean.slice(4,6), 16)/255).toFixed(4),
+      a: '1.0'
+    };
   }
   if (clean.length === 8) {
-    const r = parseInt(clean.slice(0, 2), 16) / 255;
-    const g = parseInt(clean.slice(2, 4), 16) / 255;
-    const b = parseInt(clean.slice(4, 6), 16) / 255;
-    const a = parseInt(clean.slice(6, 8), 16) / 255;
-    return { r: r.toFixed(4), g: g.toFixed(4), b: b.toFixed(4), a: a.toFixed(4) };
+    return {
+      r: (parseInt(clean.slice(0,2), 16)/255).toFixed(4),
+      g: (parseInt(clean.slice(2,4), 16)/255).toFixed(4),
+      b: (parseInt(clean.slice(4,6), 16)/255).toFixed(4),
+      a: (parseInt(clean.slice(6,8), 16)/255).toFixed(4),
+    };
   }
   return null;
 }
 
-// Converte hex RGB/RGBA in formato Android #AARRGGBB
 // CSS è #RRGGBBAA, Android vuole #AARRGGBB
 function toAndroidHex(hex) {
   if (typeof hex !== 'string') return null;
   const clean = hex.replace('#', '');
   if (clean.length === 6) return `#FF${clean.toUpperCase()}`;
   if (clean.length === 8) {
-    const rr = clean.slice(0, 2);
-    const gg = clean.slice(2, 4);
-    const bb = clean.slice(4, 6);
-    const aa = clean.slice(6, 8);
+    const [rr, gg, bb, aa] = [clean.slice(0,2), clean.slice(2,4), clean.slice(4,6), clean.slice(6,8)];
     return `#${aa}${rr}${gg}${bb}`.toUpperCase();
   }
   return null;
@@ -236,7 +239,11 @@ for (const brand of BRANDS) {
     console.log(`\nBuilding ${brand}.${mode}...`);
 
     const modeTokens = mode === 'light' ? modeLight : modeDark;
+
+    // Merge: primitives < brand < mode < component
+    // L'ordine garantisce che i layer superiori vincano sui riferimenti
     const tree = deepMerge(primitives, brandFiles[brand], modeTokens, component);
+
     const flat = flattenTokens(tree, tree);
     const count = Object.keys(flat).length;
 
