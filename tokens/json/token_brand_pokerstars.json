@@ -313,11 +313,23 @@
     "alpha": {
       "0": {
         "$type": "color",
-        "$value": "{CrossBrand.Gray.Alpha.0}"
+        "$value": "#ffffff26"
+      },
+      "100": {
+        "$type": "color",
+        "$value": "#26262612"
+      },
+      "150": {
+        "$type": "color",
+        "$value": "#2626261c"
+      },
+      "400": {
+        "$type": "color",
+        "$value": "#26262673"
       },
       "800": {
         "$type": "color",
-        "$value": "{CrossBrand.Gray.Alpha.800}"
+        "$value": "#262626cc"
       }
     },
     "black": {
