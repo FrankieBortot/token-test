@@ -51,7 +51,7 @@
   },
   "brand": {
     "$type": "string",
-    "$value": "sisal"
+    "$value": "sisal-casino"
   },
   "cornerRadius": {
     "2xl": {
@@ -72,7 +72,7 @@
     },
     "button": {
       "$type": "number",
-      "$value": "{Size.12}"
+      "$value": "{Size.128}"
     },
     "full": {
       "$type": "number",

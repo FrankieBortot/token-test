@@ -1,0 +1,14 @@
+{
+  "OS": {
+    "$type": "string",
+    "$value": "ios"
+  },
+  "container": {
+    "$type": "number",
+    "$value": 343
+  },
+  "viewportWidth": {
+    "$type": "number",
+    "$value": 375
+  }
+}

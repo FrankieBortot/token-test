@@ -1,0 +1,14 @@
+{
+  "OS": {
+    "$type": "string",
+    "$value": "android"
+  },
+  "container": {
+    "$type": "number",
+    "$value": 328
+  },
+  "viewportWidth": {
+    "$type": "number",
+    "$value": 360
+  }
+}

@@ -2,56 +2,56 @@
   "accent": {
     "100": {
       "$type": "color",
-      "$value": "{Sisal.Orange.100}"
+      "$value": "{Eloterie.Yellow.100}"
     },
     "1000": {
       "$type": "color",
-      "$value": "{Sisal.Orange.1000}"
+      "$value": "{Eloterie.Yellow.1000}"
     },
     "150": {
       "$type": "color",
-      "$value": "{Sisal.Orange.150}"
+      "$value": "{Eloterie.Yellow.150}"
     },
     "200": {
       "$type": "color",
-      "$value": "{Sisal.Orange.200}"
+      "$value": "{Eloterie.Yellow.200}"
     },
     "300": {
       "$type": "color",
-      "$value": "{Sisal.Orange.300}"
+      "$value": "{Eloterie.Yellow.300}"
     },
     "400": {
       "$type": "color",
-      "$value": "{Sisal.Orange.400}"
+      "$value": "{Eloterie.Yellow.400}"
     },
     "50": {
       "$type": "color",
-      "$value": "{Sisal.Orange.50}"
+      "$value": "{Eloterie.Yellow.50}"
     },
     "500": {
       "$type": "color",
-      "$value": "{Sisal.Orange.500}"
+      "$value": "{Eloterie.Yellow.500}"
     },
     "600": {
       "$type": "color",
-      "$value": "{Sisal.Orange.600}"
+      "$value": "{Eloterie.Yellow.600}"
     },
     "700": {
       "$type": "color",
-      "$value": "{Sisal.Orange.700}"
+      "$value": "{Eloterie.Yellow.700}"
     },
     "800": {
       "$type": "color",
-      "$value": "{Sisal.Orange.800}"
+      "$value": "{Eloterie.Yellow.800}"
     },
     "900": {
       "$type": "color",
-      "$value": "{Sisal.Orange.900}"
+      "$value": "{Eloterie.Yellow.900}"
     }
   },
   "brand": {
     "$type": "string",
-    "$value": "sisal"
+    "$value": "eloterie"
   },
   "cornerRadius": {
     "2xl": {
@@ -72,7 +72,7 @@
     },
     "button": {
       "$type": "number",
-      "$value": "{Size.12}"
+      "$value": "{Size.128}"
     },
     "full": {
       "$type": "number",
@@ -110,51 +110,51 @@
   "error": {
     "100": {
       "$type": "color",
-      "$value": "{Sisal.Red.100}"
+      "$value": "{Eloterie.Red.100}"
     },
     "1000": {
       "$type": "color",
-      "$value": "{Sisal.Red.1000}"
+      "$value": "{Eloterie.Red.1000}"
     },
     "150": {
       "$type": "color",
-      "$value": "{Sisal.Red.150}"
+      "$value": "{Eloterie.Red.150}"
     },
     "200": {
       "$type": "color",
-      "$value": "{Sisal.Red.200}"
+      "$value": "{Eloterie.Red.200}"
     },
     "300": {
       "$type": "color",
-      "$value": "{Sisal.Red.300}"
+      "$value": "{Eloterie.Red.300}"
     },
     "400": {
       "$type": "color",
-      "$value": "{Sisal.Red.400}"
+      "$value": "{Eloterie.Red.400}"
     },
     "50": {
       "$type": "color",
-      "$value": "{Sisal.Red.50}"
+      "$value": "{Eloterie.Red.50}"
     },
     "500": {
       "$type": "color",
-      "$value": "{Sisal.Red.500}"
+      "$value": "{Eloterie.Red.500}"
     },
     "600": {
       "$type": "color",
-      "$value": "{Sisal.Red.600}"
+      "$value": "{Eloterie.Red.600}"
     },
     "700": {
       "$type": "color",
-      "$value": "{Sisal.Red.700}"
+      "$value": "{Eloterie.Red.700}"
     },
     "800": {
       "$type": "color",
-      "$value": "{Sisal.Red.800}"
+      "$value": "{Eloterie.Red.800}"
     },
     "900": {
       "$type": "color",
-      "$value": "{Sisal.Red.900}"
+      "$value": "{Eloterie.Red.900}"
     }
   },
   "highlight": {
@@ -178,51 +178,51 @@
   "info": {
     "100": {
       "$type": "color",
-      "$value": "{Sisal.Blue.100}"
+      "$value": "{Eloterie.Blue.100}"
     },
     "1000": {
       "$type": "color",
-      "$value": "{Sisal.Blue.1000}"
+      "$value": "{Eloterie.Blue.1000}"
     },
     "150": {
       "$type": "color",
-      "$value": "{Sisal.Blue.150}"
+      "$value": "{Eloterie.Blue.150}"
     },
     "200": {
       "$type": "color",
-      "$value": "{Sisal.Blue.200}"
+      "$value": "{Eloterie.Blue.200}"
     },
     "300": {
       "$type": "color",
-      "$value": "{Sisal.Blue.300}"
+      "$value": "{Eloterie.Blue.300}"
     },
     "400": {
       "$type": "color",
-      "$value": "{Sisal.Blue.400}"
+      "$value": "{Eloterie.Blue.400}"
     },
     "50": {
       "$type": "color",
-      "$value": "{Sisal.Blue.50}"
+      "$value": "{Eloterie.Blue.50}"
     },
     "500": {
       "$type": "color",
-      "$value": "{Sisal.Blue.500}"
+      "$value": "{Eloterie.Blue.500}"
     },
     "600": {
       "$type": "color",
-      "$value": "{Sisal.Blue.600}"
+      "$value": "{Eloterie.Blue.600}"
     },
     "700": {
       "$type": "color",
-      "$value": "{Sisal.Blue.700}"
+      "$value": "{Eloterie.Blue.700}"
     },
     "800": {
       "$type": "color",
-      "$value": "{Sisal.Blue.800}"
+      "$value": "{Eloterie.Blue.800}"
     },
     "900": {
       "$type": "color",
-      "$value": "{Sisal.Blue.900}"
+      "$value": "{Eloterie.Blue.900}"
     }
   },
   "jackpot": {
@@ -380,51 +380,51 @@
   "success": {
     "100": {
       "$type": "color",
-      "$value": "{Sisal.Forest.100}"
+      "$value": "{Eloterie.Green.100}"
     },
     "1000": {
       "$type": "color",
-      "$value": "{Sisal.Forest.1000}"
+      "$value": "{Eloterie.Green.1000}"
     },
     "150": {
       "$type": "color",
-      "$value": "{Sisal.Forest.150}"
+      "$value": "{Eloterie.Green.150}"
     },
     "200": {
       "$type": "color",
-      "$value": "{Sisal.Forest.200}"
+      "$value": "{Eloterie.Green.200}"
     },
     "300": {
       "$type": "color",
-      "$value": "{Sisal.Forest.300}"
+      "$value": "{Eloterie.Green.300}"
     },
     "400": {
       "$type": "color",
-      "$value": "{Sisal.Forest.400}"
+      "$value": "{Eloterie.Green.400}"
     },
     "50": {
       "$type": "color",
-      "$value": "{Sisal.Forest.50}"
+      "$value": "{Eloterie.Green.50}"
     },
     "500": {
       "$type": "color",
-      "$value": "{Sisal.Forest.500}"
+      "$value": "{Eloterie.Green.500}"
     },
     "600": {
       "$type": "color",
-      "$value": "{Sisal.Forest.600}"
+      "$value": "{Eloterie.Green.600}"
     },
     "700": {
       "$type": "color",
-      "$value": "{Sisal.Forest.700}"
+      "$value": "{Eloterie.Green.700}"
     },
     "800": {
       "$type": "color",
-      "$value": "{Sisal.Forest.800}"
+      "$value": "{Eloterie.Green.800}"
     },
     "900": {
       "$type": "color",
-      "$value": "{Sisal.Forest.900}"
+      "$value": "{Eloterie.Green.900}"
     }
   },
   "typography": {
@@ -432,7 +432,7 @@
       "caption": {
         "font": {
           "$type": "string",
-          "$value": "Roboto"
+          "$value": "Titillium Web"
         },
         "line height": {
           "$type": "number",
@@ -450,7 +450,7 @@
       "captionBold": {
         "font": {
           "$type": "string",
-          "$value": "Roboto"
+          "$value": "Titillium Web"
         },
         "line height": {
           "$type": "number",
@@ -468,7 +468,7 @@
       "microCaption": {
         "font": {
           "$type": "string",
-          "$value": "Roboto"
+          "$value": "Titillium Web"
         },
         "line height": {
           "$type": "number",
@@ -486,7 +486,7 @@
       "microCaptionBold": {
         "font": {
           "$type": "string",
-          "$value": "Roboto"
+          "$value": "Titillium Web"
         },
         "line height": {
           "$type": "number",
@@ -504,7 +504,7 @@
       "p": {
         "font": {
           "$type": "string",
-          "$value": "Roboto"
+          "$value": "Titillium Web"
         },
         "line height": {
           "$type": "number",
@@ -522,7 +522,7 @@
       "pBold": {
         "font": {
           "$type": "string",
-          "$value": "Roboto"
+          "$value": "Titillium Web"
         },
         "line height": {
           "$type": "number",
@@ -540,7 +540,7 @@
       "pLead": {
         "font": {
           "$type": "string",
-          "$value": "Roboto"
+          "$value": "Titillium Web"
         },
         "line height": {
           "$type": "number",
@@ -558,7 +558,7 @@
       "pLeadBold": {
         "font": {
           "$type": "string",
-          "$value": "Roboto"
+          "$value": "Titillium Web"
         },
         "line height": {
           "$type": "number",
@@ -570,13 +570,13 @@
         },
         "weight": {
           "$type": "string",
-          "$value": "ExtraBold"
+          "$value": "SemiBold"
         }
       },
       "pMedium": {
         "font": {
           "$type": "string",
-          "$value": "Roboto"
+          "$value": "Titillium Web"
         },
         "line height": {
           "$type": "number",
@@ -596,7 +596,7 @@
       "d1": {
         "font": {
           "$type": "string",
-          "$value": "Mulish"
+          "$value": "Titillium Web"
         },
         "line height": {
           "$type": "number",
@@ -608,13 +608,13 @@
         },
         "weight": {
           "$type": "string",
-          "$value": "ExtraBold"
+          "$value": "Bold"
         }
       },
       "d2": {
         "font": {
           "$type": "string",
-          "$value": "Mulish"
+          "$value": "Titillium Web"
         },
         "line height": {
           "$type": "number",
@@ -626,7 +626,7 @@
         },
         "weight": {
           "$type": "string",
-          "$value": "ExtraBold"
+          "$value": "Bold"
         }
       }
     },
@@ -634,7 +634,7 @@
       "h1": {
         "font": {
           "$type": "string",
-          "$value": "Mulish"
+          "$value": "Titillium Web"
         },
         "line height": {
           "$type": "number",
@@ -646,13 +646,13 @@
         },
         "weight": {
           "$type": "string",
-          "$value": "ExtraBold"
+          "$value": "Bold"
         }
       },
       "h2": {
         "font": {
           "$type": "string",
-          "$value": "Mulish"
+          "$value": "Titillium Web"
         },
         "line height": {
           "$type": "number",
@@ -664,13 +664,13 @@
         },
         "weight": {
           "$type": "string",
-          "$value": "ExtraBold"
+          "$value": "Bold"
         }
       },
       "h3": {
         "font": {
           "$type": "string",
-          "$value": "Mulish"
+          "$value": "Titillium Web"
         },
         "line height": {
           "$type": "number",
@@ -682,7 +682,7 @@
         },
         "weight": {
           "$type": "string",
-          "$value": "ExtraBold"
+          "$value": "Bold"
         }
       }
     },
@@ -690,7 +690,7 @@
       "button": {
         "font": {
           "$type": "string",
-          "$value": "Roboto"
+          "$value": "Titillium Web"
         },
         "line height": {
           "$type": "number",
@@ -708,7 +708,7 @@
       "link": {
         "font": {
           "$type": "string",
-          "$value": "Roboto"
+          "$value": "Titillium Web"
         },
         "line height": {
           "$type": "number",
@@ -726,7 +726,7 @@
       "microButton": {
         "font": {
           "$type": "string",
-          "$value": "Roboto"
+          "$value": "Titillium Web"
         },
         "line height": {
           "$type": "number",
@@ -744,7 +744,7 @@
       "microLink": {
         "font": {
           "$type": "string",
-          "$value": "Roboto"
+          "$value": "Titillium Web"
         },
         "line height": {
           "$type": "number",
@@ -764,51 +764,51 @@
   "warning": {
     "100": {
       "$type": "color",
-      "$value": "{Sisal.Yellow.100}"
+      "$value": "{Eloterie.Yellow.100}"
     },
     "1000": {
       "$type": "color",
-      "$value": "{Sisal.Yellow.1000}"
+      "$value": "{Eloterie.Yellow.1000}"
     },
     "150": {
       "$type": "color",
-      "$value": "{Sisal.Yellow.150}"
+      "$value": "{Eloterie.Yellow.150}"
     },
     "200": {
       "$type": "color",
-      "$value": "{Sisal.Yellow.200}"
+      "$value": "{Eloterie.Yellow.200}"
     },
     "300": {
       "$type": "color",
-      "$value": "{Sisal.Yellow.300}"
+      "$value": "{Eloterie.Yellow.300}"
     },
     "400": {
       "$type": "color",
-      "$value": "{Sisal.Yellow.400}"
+      "$value": "{Eloterie.Yellow.400}"
     },
     "50": {
       "$type": "color",
-      "$value": "{Sisal.Yellow.50}"
+      "$value": "{Eloterie.Yellow.50}"
     },
     "500": {
       "$type": "color",
-      "$value": "{Sisal.Yellow.500}"
+      "$value": "{Eloterie.Yellow.500}"
     },
     "600": {
       "$type": "color",
-      "$value": "{Sisal.Yellow.600}"
+      "$value": "{Eloterie.Yellow.600}"
     },
     "700": {
       "$type": "color",
-      "$value": "{Sisal.Yellow.700}"
+      "$value": "{Eloterie.Yellow.700}"
     },
     "800": {
       "$type": "color",
-      "$value": "{Sisal.Yellow.800}"
+      "$value": "{Eloterie.Yellow.800}"
     },
     "900": {
       "$type": "color",
-      "$value": "{Sisal.Yellow.900}"
+      "$value": "{Eloterie.Yellow.900}"
     }
   }
 }
