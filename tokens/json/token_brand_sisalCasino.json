@@ -50,6 +50,108 @@
     }
   },
   "brand": {
+    "primary": {
+      "100": {
+        "$type": "color",
+        "$value": "{Casino.Red.100}"
+      },
+      "1000": {
+        "$type": "color",
+        "$value": "{Casino.Red.1000}"
+      },
+      "150": {
+        "$type": "color",
+        "$value": "{Casino.Red.150}"
+      },
+      "200": {
+        "$type": "color",
+        "$value": "{Casino.Red.200}"
+      },
+      "300": {
+        "$type": "color",
+        "$value": "{Casino.Red.300}"
+      },
+      "400": {
+        "$type": "color",
+        "$value": "{Casino.Red.400}"
+      },
+      "50": {
+        "$type": "color",
+        "$value": "{Casino.Red.50}"
+      },
+      "500": {
+        "$type": "color",
+        "$value": "{Casino.Red.500}"
+      },
+      "600": {
+        "$type": "color",
+        "$value": "{Casino.Red.600}"
+      },
+      "700": {
+        "$type": "color",
+        "$value": "{Casino.Red.700}"
+      },
+      "800": {
+        "$type": "color",
+        "$value": "{Casino.Red.800}"
+      },
+      "900": {
+        "$type": "color",
+        "$value": "{Casino.Red.900}"
+      }
+    },
+    "secondary": {
+      "100": {
+        "$type": "color",
+        "$value": "{Casino.Purple.100}"
+      },
+      "1000": {
+        "$type": "color",
+        "$value": "{Casino.Purple.1000}"
+      },
+      "150": {
+        "$type": "color",
+        "$value": "{Casino.Purple.150}"
+      },
+      "200": {
+        "$type": "color",
+        "$value": "{Casino.Purple.200}"
+      },
+      "300": {
+        "$type": "color",
+        "$value": "{Casino.Purple.300}"
+      },
+      "400": {
+        "$type": "color",
+        "$value": "{Casino.Purple.400}"
+      },
+      "50": {
+        "$type": "color",
+        "$value": "{Casino.Purple.50}"
+      },
+      "500": {
+        "$type": "color",
+        "$value": "{Casino.Purple.500}"
+      },
+      "600": {
+        "$type": "color",
+        "$value": "{Casino.Purple.600}"
+      },
+      "700": {
+        "$type": "color",
+        "$value": "{Casino.Purple.700}"
+      },
+      "800": {
+        "$type": "color",
+        "$value": "{Casino.Purple.800}"
+      },
+      "900": {
+        "$type": "color",
+        "$value": "{Casino.Purple.900}"
+      }
+    }
+  },
+  "brandName": {
     "$type": "string",
     "$value": "sisal-casino"
   },
