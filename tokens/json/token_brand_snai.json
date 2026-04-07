@@ -50,6 +50,108 @@
     }
   },
   "brand": {
+    "primary": {
+      "100": {
+        "$type": "color",
+        "$value": "{Snai.Orange.100}"
+      },
+      "1000": {
+        "$type": "color",
+        "$value": "{Snai.Orange.1000}"
+      },
+      "150": {
+        "$type": "color",
+        "$value": "{Snai.Orange.150}"
+      },
+      "200": {
+        "$type": "color",
+        "$value": "{Snai.Orange.200}"
+      },
+      "300": {
+        "$type": "color",
+        "$value": "{Snai.Orange.300}"
+      },
+      "400": {
+        "$type": "color",
+        "$value": "{Snai.Orange.400}"
+      },
+      "50": {
+        "$type": "color",
+        "$value": "{Snai.Orange.50}"
+      },
+      "500": {
+        "$type": "color",
+        "$value": "{Snai.Orange.500}"
+      },
+      "600": {
+        "$type": "color",
+        "$value": "{Snai.Orange.600}"
+      },
+      "700": {
+        "$type": "color",
+        "$value": "{Snai.Orange.700}"
+      },
+      "800": {
+        "$type": "color",
+        "$value": "{Snai.Orange.800}"
+      },
+      "900": {
+        "$type": "color",
+        "$value": "{Snai.Orange.900}"
+      }
+    },
+    "secondary": {
+      "100": {
+        "$type": "color",
+        "$value": "{Snai.Orange.100}"
+      },
+      "1000": {
+        "$type": "color",
+        "$value": "{Snai.Orange.1000}"
+      },
+      "150": {
+        "$type": "color",
+        "$value": "{Snai.Orange.150}"
+      },
+      "200": {
+        "$type": "color",
+        "$value": "{Snai.Orange.200}"
+      },
+      "300": {
+        "$type": "color",
+        "$value": "{Snai.Orange.300}"
+      },
+      "400": {
+        "$type": "color",
+        "$value": "{Snai.Orange.400}"
+      },
+      "50": {
+        "$type": "color",
+        "$value": "{Snai.Orange.50}"
+      },
+      "500": {
+        "$type": "color",
+        "$value": "{Snai.Orange.500}"
+      },
+      "600": {
+        "$type": "color",
+        "$value": "{Snai.Orange.600}"
+      },
+      "700": {
+        "$type": "color",
+        "$value": "{Snai.Orange.700}"
+      },
+      "800": {
+        "$type": "color",
+        "$value": "{Snai.Orange.800}"
+      },
+      "900": {
+        "$type": "color",
+        "$value": "{Snai.Orange.900}"
+      }
+    }
+  },
+  "brandName": {
     "$type": "string",
     "$value": "snai"
   },

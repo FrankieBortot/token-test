@@ -50,6 +50,108 @@
     }
   },
   "brand": {
+    "primary": {
+      "100": {
+        "$type": "color",
+        "$value": "{Sisal.Green.100}"
+      },
+      "1000": {
+        "$type": "color",
+        "$value": "{Sisal.Green.1000}"
+      },
+      "150": {
+        "$type": "color",
+        "$value": "{Sisal.Green.150}"
+      },
+      "200": {
+        "$type": "color",
+        "$value": "{Sisal.Green.200}"
+      },
+      "300": {
+        "$type": "color",
+        "$value": "{Sisal.Green.300}"
+      },
+      "400": {
+        "$type": "color",
+        "$value": "{Sisal.Green.400}"
+      },
+      "50": {
+        "$type": "color",
+        "$value": "{Sisal.Green.50}"
+      },
+      "500": {
+        "$type": "color",
+        "$value": "{Sisal.Green.500}"
+      },
+      "600": {
+        "$type": "color",
+        "$value": "{Sisal.Green.600}"
+      },
+      "700": {
+        "$type": "color",
+        "$value": "{Sisal.Green.700}"
+      },
+      "800": {
+        "$type": "color",
+        "$value": "{Sisal.Green.800}"
+      },
+      "900": {
+        "$type": "color",
+        "$value": "{Sisal.Green.900}"
+      }
+    },
+    "secondary": {
+      "100": {
+        "$type": "color",
+        "$value": "{Sisal.Forest.100}"
+      },
+      "1000": {
+        "$type": "color",
+        "$value": "{Sisal.Forest.1000}"
+      },
+      "150": {
+        "$type": "color",
+        "$value": "{Sisal.Forest.150}"
+      },
+      "200": {
+        "$type": "color",
+        "$value": "{Sisal.Forest.200}"
+      },
+      "300": {
+        "$type": "color",
+        "$value": "{Sisal.Forest.300}"
+      },
+      "400": {
+        "$type": "color",
+        "$value": "{Sisal.Forest.400}"
+      },
+      "50": {
+        "$type": "color",
+        "$value": "{Sisal.Forest.50}"
+      },
+      "500": {
+        "$type": "color",
+        "$value": "{Sisal.Forest.500}"
+      },
+      "600": {
+        "$type": "color",
+        "$value": "{Sisal.Forest.600}"
+      },
+      "700": {
+        "$type": "color",
+        "$value": "{Sisal.Forest.700}"
+      },
+      "800": {
+        "$type": "color",
+        "$value": "{Sisal.Forest.800}"
+      },
+      "900": {
+        "$type": "color",
+        "$value": "{Sisal.Forest.900}"
+      }
+    }
+  },
+  "brandName": {
     "$type": "string",
     "$value": "sisal"
   },

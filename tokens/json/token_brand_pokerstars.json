@@ -50,6 +50,108 @@
     }
   },
   "brand": {
+    "primary": {
+      "100": {
+        "$type": "color",
+        "$value": "{Pokerstars.Teal.100}"
+      },
+      "1000": {
+        "$type": "color",
+        "$value": "{Pokerstars.Teal.1000}"
+      },
+      "150": {
+        "$type": "color",
+        "$value": "{Pokerstars.Teal.150}"
+      },
+      "200": {
+        "$type": "color",
+        "$value": "{Pokerstars.Teal.200}"
+      },
+      "300": {
+        "$type": "color",
+        "$value": "{Pokerstars.Teal.300}"
+      },
+      "400": {
+        "$type": "color",
+        "$value": "{Pokerstars.Teal.400}"
+      },
+      "50": {
+        "$type": "color",
+        "$value": "{Pokerstars.Teal.50}"
+      },
+      "500": {
+        "$type": "color",
+        "$value": "{Pokerstars.Teal.500}"
+      },
+      "600": {
+        "$type": "color",
+        "$value": "{Pokerstars.Teal.600}"
+      },
+      "700": {
+        "$type": "color",
+        "$value": "{Pokerstars.Teal.700}"
+      },
+      "800": {
+        "$type": "color",
+        "$value": "{Pokerstars.Teal.800}"
+      },
+      "900": {
+        "$type": "color",
+        "$value": "{Pokerstars.Teal.900}"
+      }
+    },
+    "secondary": {
+      "100": {
+        "$type": "color",
+        "$value": "{Pokerstars.Red.100}"
+      },
+      "1000": {
+        "$type": "color",
+        "$value": "{Pokerstars.Red.1000}"
+      },
+      "150": {
+        "$type": "color",
+        "$value": "{Pokerstars.Red.150}"
+      },
+      "200": {
+        "$type": "color",
+        "$value": "{Pokerstars.Red.200}"
+      },
+      "300": {
+        "$type": "color",
+        "$value": "{Pokerstars.Red.300}"
+      },
+      "400": {
+        "$type": "color",
+        "$value": "{Pokerstars.Red.400}"
+      },
+      "50": {
+        "$type": "color",
+        "$value": "{Pokerstars.Red.50}"
+      },
+      "500": {
+        "$type": "color",
+        "$value": "{Pokerstars.Red.500}"
+      },
+      "600": {
+        "$type": "color",
+        "$value": "{Pokerstars.Red.600}"
+      },
+      "700": {
+        "$type": "color",
+        "$value": "{Pokerstars.Red.700}"
+      },
+      "800": {
+        "$type": "color",
+        "$value": "{Pokerstars.Red.800}"
+      },
+      "900": {
+        "$type": "color",
+        "$value": "{Pokerstars.Red.900}"
+      }
+    }
+  },
+  "brandName": {
     "$type": "string",
     "$value": "pokerstars"
   },

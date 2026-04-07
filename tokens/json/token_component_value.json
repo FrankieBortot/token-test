@@ -22,7 +22,7 @@
   "alert": {
     "Size": {
       "$type": "number",
-      "$value": 0
+      "$value": "{Size.0}"
     },
     "inLine": {
       "block": {
@@ -2846,7 +2846,7 @@
         },
         "width": {
           "$type": "number",
-          "$value": "{viewport width}"
+          "$value": "{viewportWidth}"
         }
       }
     }
@@ -3171,11 +3171,11 @@
         "radius": {
           "$type": "number",
           "$value": "{cornerRadius.md}"
+        },
+        "width": {
+          "$type": "number",
+          "$value": "{Size.2}"
         }
-      },
-      "border width": {
-        "$type": "number",
-        "$value": "{Size.2}"
       },
       "gap": {
         "$type": "number",
@@ -3225,11 +3225,11 @@
         "radius": {
           "$type": "number",
           "$value": "{cornerRadius.md}"
+        },
+        "width": {
+          "$type": "number",
+          "$value": "{Size.2}"
         }
-      },
-      "border width": {
-        "$type": "number",
-        "$value": "{Size.2}"
       },
       "gap": {
         "$type": "number",
@@ -3476,11 +3476,11 @@
           "radius": {
             "$type": "number",
             "$value": "{cornerRadius.sm}"
+          },
+          "width": {
+            "$type": "number",
+            "$value": "{Size.2}"
           }
-        },
-        "border width": {
-          "$type": "number",
-          "$value": "{Size.2}"
         },
         "gap": {
           "$type": "number",
@@ -3510,11 +3510,11 @@
           "radius": {
             "$type": "number",
             "$value": "{cornerRadius.sm}"
+          },
+          "width": {
+            "$type": "number",
+            "$value": "{Size.2}"
           }
-        },
-        "border width": {
-          "$type": "number",
-          "$value": "{Size.2}"
         },
         "gap": {
           "$type": "number",
@@ -3544,11 +3544,11 @@
           "radius": {
             "$type": "number",
             "$value": "{cornerRadius.sm}"
+          },
+          "width": {
+            "$type": "number",
+            "$value": "{Size.2}"
           }
-        },
-        "border width": {
-          "$type": "number",
-          "$value": "{Size.2}"
         },
         "gap": {
           "$type": "number",
@@ -4572,7 +4572,7 @@
         },
         "height": {
           "$type": "number",
-          "$value": 36
+          "$value": "{Size.36}"
         },
         "padding": {
           "horizontal": {
@@ -6309,7 +6309,7 @@
         "border": {
           "radius": {
             "$type": "number",
-            "$value": 1000
+            "$value": "{cornerRadius.full}"
           },
           "width": {
             "$type": "number",

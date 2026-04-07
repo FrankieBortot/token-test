@@ -1,9 +1,5 @@
 {
   "color": {
-    "Color": {
-      "$type": "color",
-      "$value": "#FFFFFF"
-    },
     "bg": {
       "accent": {
         "$type": "color",
@@ -480,6 +476,10 @@
       "success": {
         "$type": "color",
         "$value": "{success.500}"
+      },
+      "transparent": {
+        "$type": "color",
+        "$value": "{neutral.alpha.0}"
       },
       "warning": {
         "$type": "color",

@@ -1,0 +1,18 @@
+{
+  "Notifications": {
+    "$type": "string",
+    "$value": "10"
+  },
+  "container": {
+    "$type": "number",
+    "$value": 328
+  },
+  "osName": {
+    "$type": "string",
+    "$value": "android"
+  },
+  "viewportWidth": {
+    "$type": "number",
+    "$value": 360
+  }
+}
